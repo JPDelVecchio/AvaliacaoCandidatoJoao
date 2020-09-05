@@ -1,5 +1,4 @@
 C:\Users\DELVECCHIO\Desktop\Desafio Mega Laudo\MiniApiMegaLaudo\MiniApiMegaLaudo\obj\Debug\MiniApiMegaLaudo.csproj.App.config
-C:\Users\DELVECCHIO\Desktop\Desafio Mega Laudo\MiniApiMegaLaudo\MiniApiMegaLaudo\obj\Debug\MiniApiMegaLaudo.csprojAssemblyReference.cache
 C:\Users\DELVECCHIO\Desktop\Desafio Mega Laudo\MiniApiMegaLaudo\MiniApiMegaLaudo\obj\Debug\MiniApiMegaLaudo.csproj.CoreCompileInputs.cache
 C:\Users\DELVECCHIO\Desktop\Desafio Mega Laudo\MiniApiMegaLaudo\MiniApiMegaLaudo\bin\MiniApiMegaLaudo.dll.config
 C:\Users\DELVECCHIO\Desktop\Desafio Mega Laudo\MiniApiMegaLaudo\MiniApiMegaLaudo\bin\MiniApiMegaLaudo.dll

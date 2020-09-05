@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http; 
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 
 namespace MiniApiMegaLaudo.Controllers
 {
@@ -52,10 +53,10 @@ namespace MiniApiMegaLaudo.Controllers
 
 
 
-        /*alterar Cliente*/
+        /*alterar*/
         [HttpPut]
         [Route("Alterar")]
-        public HttpResponseMessage Alterar(int id, Cliente cliente)
+        public HttpResponseMessage Alterar(Cliente cliente)
         {
             try
             {
@@ -63,42 +64,34 @@ namespace MiniApiMegaLaudo.Controllers
 
                 if (cliente == null) throw new ArgumentNullException("cliente");
 
-                if (id == 0) throw new ArgumentNullException("id");
-
-
                 Conexao cx = new Conexao();
                 cx.ConectarBase();
                 SqlCommand command = new SqlCommand();
                 command.Connection = cx.connection;
-                command.CommandText = "exec  ";
+                command.CommandText = "Exec ALTERAR_CLIENTE @id, @cpf, @nome, @telefone, @endereco;";
 
+                command.Parameters.AddWithValue("@id", cliente.Id);
+                command.Parameters.AddWithValue("@cpf",cliente.CPF);
+                command.Parameters.AddWithValue("@nome", cliente.Nome);
+                command.Parameters.AddWithValue("@telefone", cliente.Telefone);
+                command.Parameters.AddWithValue("@Endereco", cliente.Endereco);
 
+                int i = command.ExecuteNonQuery();
+                res = i > 0;
+
+                cx.DesconectarBase();
+                return Request.CreateResponse(HttpStatusCode.OK, res); 
             }
             catch (Exception ex )
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.BadRequest, "");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         /********************Consulta de Clientes **********************/
         [HttpGet]
-        [Route("todos")]
+        [Route("Todos")]
         public HttpResponseMessage Todos()
         {
             try
@@ -137,6 +130,35 @@ namespace MiniApiMegaLaudo.Controllers
 
         }
 
+        /********Excluir************/
+        [HttpDelete]
+        [Route("Excluir")]
+        public HttpResponseMessage Excluir(Cliente cliente)
+        {
+            try
+            {
+                bool res = false;
+                Conexao con = new Conexao();
+                con.ConectarBase();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = con.connection;
+                command.CommandText = "EXEC EXCLUIR_CLIENTE @id";
+                command.Parameters.AddWithValue("@id", cliente.Id);
+
+                int i = command.ExecuteNonQuery();
+
+                res = 1 > 0;
+                con.DesconectarBase();  
+
+                return Request.CreateResponse(HttpStatusCode.BadRequest,res);
+
+            }
+            catch (Exception ex )
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message); 
+            }
+        }
     }
 }
  
