@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniApiMegaLaudo", "MiniApiMegaLaudo.csproj", "{DA3F3E1D-FEF9-4C69-B295-CEAAEB7D85B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniApiMegaLaudo", "MiniApiMegaLaudo\MiniApiMegaLaudo.csproj", "{929AF545-C9A5-48F6-997A-2131BBA42758}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DA3F3E1D-FEF9-4C69-B295-CEAAEB7D85B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA3F3E1D-FEF9-4C69-B295-CEAAEB7D85B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA3F3E1D-FEF9-4C69-B295-CEAAEB7D85B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA3F3E1D-FEF9-4C69-B295-CEAAEB7D85B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{929AF545-C9A5-48F6-997A-2131BBA42758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{929AF545-C9A5-48F6-997A-2131BBA42758}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{929AF545-C9A5-48F6-997A-2131BBA42758}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{929AF545-C9A5-48F6-997A-2131BBA42758}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FE7D43CC-9A39-412E-8484-1EFC3C9E475E}
+		SolutionGuid = {25B611A7-5840-4395-9F8B-ED510F077C4D}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,11 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace MiniApiMegaLaudo.Models
+{
+    public class Servico
+    {
+    }
+}
