@@ -15,17 +15,18 @@ namespace MiniApiMegaLaudo.Controllers
         /******** inclussão ***********/
         [HttpPost]
         [Route("Incluir")]
-        public HttpResponseMessage Incluir(Veiculo veiculo)
+        public HttpResponseMessage Incluir(Veiculo v)
         {
             try
             {
                 bool res = false;
 
-                if (veiculo == null)
+                if (v == null)
                 {
                     throw new ArgumentNullException("Veiculo");
                 }
-
+                Veiculo veiculo = new Veiculo();
+                veiculo = v;
                 Conexao cx = new Conexao();
                 cx.ConectarBase();
                 SqlCommand command = new SqlCommand();
@@ -33,8 +34,8 @@ namespace MiniApiMegaLaudo.Controllers
                 command.CommandText = "EXEC INCLUIR_VEICULO @PLACA, @MARCA, @MODELO, @ANOFABRICACAO, @ANOMODELO";
 
                 command.Parameters.AddWithValue("Placa", veiculo.Placa);
-                command.Parameters.AddWithValue("marca", ((object)veiculo.Id_marca) ?? DBNull.Value);
-                command.Parameters.AddWithValue("modelo", ((object)veiculo.Id_modelo) ?? DBNull.Value);
+                command.Parameters.AddWithValue("marca", ((int)veiculo.Id_marca));
+                command.Parameters.AddWithValue("modelo", ((int)veiculo.Id_modelo));
                 command.Parameters.AddWithValue("anofabricacao", ((object)veiculo.AnoFabricacao) ?? DBNull.Value);
                 command.Parameters.AddWithValue("anomodelo", ((object)veiculo.AnoModelo) ?? DBNull.Value);
 
@@ -109,7 +110,7 @@ namespace MiniApiMegaLaudo.Controllers
                 command.CommandText = "EXEC ALTERAR_VEICULO @ID, @PLACA, @MARCA, @MODELO, @ANOMODELO, @ANOFABRICACAO";
 
                 command.Parameters.AddWithValue("id", veiculo.Id);
-                command.Parameters.AddWithValue("placa", ((object)veiculo.Id_marca ?? DBNull.Value));
+                command.Parameters.AddWithValue("placa", ((object)veiculo.Placa ?? DBNull.Value));
                 command.Parameters.AddWithValue("marca", ((object)veiculo.Id_marca ?? DBNull.Value));
                 command.Parameters.AddWithValue("modelo", ((object)veiculo.Id_modelo ?? DBNull.Value));
                 command.Parameters.AddWithValue("anomodelo", ((object)veiculo.AnoModelo ?? DBNull.Value));

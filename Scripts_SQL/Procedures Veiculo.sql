@@ -1,4 +1,5 @@
- 
+USE MEGALAUDO;
+GO 
 /***************** TABLE VEICULO**************/
 /* CREATE */
 CREATE PROC INCLUIR_VEICULO

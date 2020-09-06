@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.UI.WebControls;
 
 namespace MiniApiMegaLaudo.Controllers
 {
@@ -34,8 +35,8 @@ namespace MiniApiMegaLaudo.Controllers
 
                 command.Parameters.AddWithValue("nome", servico.Nome);
                 command.Parameters.AddWithValue("descricao", ((object)servico.Descricao) ?? DBNull.Value);
-                command.Parameters.AddWithValue("cliente", ((object)servico.Id_cliente) ?? DBNull.Value);
-                command.Parameters.AddWithValue("veiculo", ((object)servico.Id_veiculo) ?? DBNull.Value);
+                command.Parameters.AddWithValue("cliente", ((object)servico.Cliente.Id) ?? DBNull.Value);
+                command.Parameters.AddWithValue("veiculo", ((object)servico.Veiculo.Id) ?? DBNull.Value);
                 command.Parameters.AddWithValue("valor", ((object)servico.Valor) ?? DBNull.Value);
 
                 int i = command.ExecuteNonQuery();
@@ -126,8 +127,127 @@ namespace MiniApiMegaLaudo.Controllers
             } 
         }
 
+        [HttpGet]
+        [Route("Todos")]
+        public HttpResponseMessage Todos()
+        { 
+            try
+            {
+                var listaservicos = new List<Servico>();
+                Conexao con = new Conexao();
+                con.ConectarBase();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = con.connection;
+                command.CommandText = "exec LEITURA_SERVICOS";
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var servico = new Servico();
+                    {
+                        servico.DataServico = reader["DATASERVICO"] == DBNull.Value ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["DATASERVICO"]);
+                        servico.Nome = reader["SERVICO"] == DBNull.Value ? string.Empty : reader["SERVICO"].ToString();
+                        servico.Descricao = reader["DESCRICAO"] == DBNull.Value ? string.Empty : reader["DESCRICAO"].ToString();
+                        servico.Cliente.Id = reader["CLIENTE"] == DBNull.Value ? 0 : Convert.ToInt32( reader["CLIENTE"]);
+                        servico.Valor = reader["VALOR"] == DBNull.Value ? 0.0 : Convert.ToDouble(reader["VALOR"]);
+
+                    }
+                    listaservicos.Add(servico);
+                } 
+                con.DesconectarBase();
+
+                return Request.CreateResponse(HttpStatusCode.OK, listaservicos.ToArray());
+            } 
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+
+        }
 
 
+        [HttpGet]
+        [Route("BuscaPorVeiculo")]
+        public HttpResponseMessage ServicoPorVeiculo(string placa)
+        { 
+            try
+            {
+                var listaservicos = new List<Servico>();
+                Conexao con = new Conexao();
+                con.ConectarBase();
 
+                SqlCommand command = new SqlCommand();
+                command.Connection = con.connection;
+                command.CommandText = "EXEC LEITURA_SERVICO_VEICULO '@PLACA'";
+                command.Parameters.AddWithValue("Placa", placa).ToString();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var servico = new Servico();
+                    {
+                        servico.DataServico = reader["DATASERVICO"] == DBNull.Value ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["DATASERVICO"]);
+                        servico.Nome = reader["SERVICO"] == DBNull.Value ? string.Empty : reader["SERVICO"].ToString();
+                        servico.Descricao = reader["DESCRICAO"] == DBNull.Value ? string.Empty : reader["DESCRICAO"].ToString(); 
+                        servico.Valor = reader["VALOR"] == DBNull.Value ? 0.0 : Convert.ToDouble(reader["VALOR"]);
+                        servico.Veiculo.Placa = reader["PLACA"] == DBNull.Value ? string.Empty : reader["PLACA"].ToString();
+                        servico.Veiculo.AnoModelo = reader["ANOMODELO"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ANOMODELO"]);
+                        servico.Veiculo.AnoFabricacao = reader["ANOFABRICACAO"] == DBNull.Value ? 0 : Convert.ToInt32(reader["ANOFABRICACAO"]);
+
+                    }
+                    listaservicos.Add(servico);
+                }
+                con.DesconectarBase();
+
+                return Request.CreateResponse(HttpStatusCode.OK, listaservicos.ToArray());
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+
+        }
+
+
+        [HttpGet]
+        [Route("BuscaPorCliente")]
+        public HttpResponseMessage ServicoPorCliente(string cpfCliente)
+        {
+            try
+            {
+                var listaservicos = new List<Servico>();
+                Conexao con = new Conexao();
+                con.ConectarBase();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = con.connection;
+                command.CommandText = "EXEC LEITURA_SERVICO_VEICULO '@CPF'";
+                command.Parameters.AddWithValue("CPF", cpfCliente).ToString();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var servico = new Servico();
+                    {
+                        servico.DataServico = reader["DATASERVICO"] == DBNull.Value ? Convert.ToDateTime(null) : Convert.ToDateTime(reader["DATASERVICO"]);
+                        servico.Nome = reader["SERVICO"] == DBNull.Value ? string.Empty : reader["SERVICO"].ToString();
+                        servico.Descricao = reader["DESCRICAO"] == DBNull.Value ? string.Empty : reader["DESCRICAO"].ToString();
+                        servico.Valor = reader["VALOR"] == DBNull.Value ? 0.0 : Convert.ToDouble(reader["VALOR"]);
+                        servico.Cliente.Nome = reader["CLIENTE"] == DBNull.Value ? string.Empty : reader["CLIENTE"].ToString();
+   
+                    }
+                    listaservicos.Add(servico);
+                }
+                con.DesconectarBase();
+
+                return Request.CreateResponse(HttpStatusCode.OK, listaservicos.ToArray());
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+
+        }
     }
 }

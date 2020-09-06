@@ -95,3 +95,4 @@ C:\Users\DELVECCHIO\Desktop\Desafio Mega Laudo\MiniApiMegaLaudo\MiniApiMegaLaudo
 C:\Users\DELVECCHIO\Desktop\Desafio Mega Laudo\MiniApiMegaLaudo\MiniApiMegaLaudo\obj\Debug\MiniApiMegaLaudo.csproj.CopyComplete
 C:\Users\DELVECCHIO\Desktop\Desafio Mega Laudo\MiniApiMegaLaudo\MiniApiMegaLaudo\obj\Debug\MiniApiMegaLaudo.dll
 C:\Users\DELVECCHIO\Desktop\Desafio Mega Laudo\MiniApiMegaLaudo\MiniApiMegaLaudo\obj\Debug\MiniApiMegaLaudo.pdb
+C:\Users\DELVECCHIO\Desktop\Desafio Mega Laudo\MiniApiMegaLaudo\MiniApiMegaLaudo\obj\Debug\MiniApiMegaLaudo.csprojAssemblyReference.cache
